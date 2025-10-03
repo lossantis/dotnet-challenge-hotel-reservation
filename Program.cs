@@ -5,6 +5,7 @@ class Program
 {
     static void Main()
     {
+        // break;
         try
         {
             List<Suite> availableSuites = LoadSuites("Files/suites.json");
@@ -61,7 +62,7 @@ class Program
 
         foreach (Suite suite in suites)
         {
-            menu.Add(++menuOption, suite.SuiteType);
+            menu.Add(++menuOption, suite.SuiteType ?? "Unknown Suite");
         }
 
         return menu;
@@ -105,7 +106,7 @@ class Program
             Console.Write($"Enter last name of guest {i + 1}: ");
             string? lastName = Console.ReadLine();
 
-            guests.Add(new Person(firstName, lastName));
+            guests.Add(new Person(firstName ?? string.Empty, lastName ?? string.Empty));
         }
 
         Console.Write("Enter number of nights to book: ");

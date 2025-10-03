@@ -11,9 +11,13 @@ namespace hotel.Models
         decimal pricePerNight
     )
     {
-        public string SuiteType { get; } = suiteType;
-        public int Capacity { get; } = capacity;
-        public decimal PricePerNight { get; } = pricePerNight;
+        private readonly string _suiteType = suiteType;
+        private readonly int _capacity = capacity;
+        private readonly decimal _pricePerNight = pricePerNight;
+
+        public string SuiteType => _suiteType;
+        public int Capacity => _capacity;
+        public decimal PricePerNight => _pricePerNight;
 
         public void Deconstruct(out string suiteType, out int capacity, out decimal pricePerNight)
         {
