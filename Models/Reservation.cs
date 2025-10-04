@@ -12,8 +12,8 @@ namespace hotel.Models
         private Suite? _suite;
         private readonly int _bookedNights = bookedNights > 0 ? bookedNights : throw new BookedNightsLowerThanZeroException();
 
-        private const int DiscountNightsThreshold = 10;
-        private const decimal DiscountRate = 0.9M;
+        public const int DiscountNightsThreshold = 10;
+        public const decimal DiscountRate = 0.9M;
 
         public IReadOnlyList<Person> Guests => _guests.AsReadOnly();
         public Suite? Suite => _suite;
@@ -72,9 +72,8 @@ namespace hotel.Models
             _guests.AddRange(guestList);
         }
 
-        
         public int GetGuestCount() => _guests.Count;
-        
+
         public decimal CalculateDailyRate()
         {
             if (_suite is null)

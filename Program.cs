@@ -5,7 +5,6 @@ class Program
 {
     static void Main()
     {
-        // break;
         try
         {
             List<Suite> availableSuites = LoadSuites("Files/suites.json");
@@ -96,19 +95,6 @@ class Program
             Console.Write($"Invalid input. Enter total guests (max {suite.Capacity}): ");
         }
 
-        List<Person> guests = new();
-
-        for (int i = 0; i < guestsInput; i++)
-        {
-            Console.Write($"Enter first name of guest {i + 1}: ");
-            string? firstName = Console.ReadLine();
-
-            Console.Write($"Enter last name of guest {i + 1}: ");
-            string? lastName = Console.ReadLine();
-
-            guests.Add(new Person(firstName ?? string.Empty, lastName ?? string.Empty));
-        }
-
         Console.Write("Enter number of nights to book: ");
 
         int bookedNights;
@@ -119,16 +105,28 @@ class Program
         }
 
         Reservation reservation = new Reservation(bookedNights);
-
         reservation.AddSuite(suite);
 
-        // Use AddGuest for each guest
-        foreach (var guest in guests)
+        for (int i = 0; i < guestsInput; i++)
         {
-            reservation.AddGuest(guest);
+            Console.Write($"Enter first name of guest {i + 1}: ");
+            string? firstName = Console.ReadLine();
+
+            Console.Write($"Enter last name of guest {i + 1}: ");
+            string? lastName = Console.ReadLine();
+
+            reservation.AddGuest(new Person(firstName ?? string.Empty, lastName ?? string.Empty));
         }
 
         Console.WriteLine($"\nGuest count: {reservation.GetGuestCount()}");
+
+        Console.WriteLine("Guests:");
+        IEnumerable<Person> guests = reservation.Guests;
+        foreach (Person guest in guests)
+        {
+            Console.WriteLine($"- {guest.FirstName} {guest.LastName}");
+        }
+
         Console.WriteLine($"Total rate for {bookedNights} nights: {reservation.CalculateDailyRate():C}");
 
         Pause();

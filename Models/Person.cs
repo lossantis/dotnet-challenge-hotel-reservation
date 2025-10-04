@@ -10,9 +10,12 @@ namespace hotel.Models
         string lastName
     )
     {
-        public string FirstName { get; } = firstName;
-        public string LastName { get; } = lastName;
-    
+        private readonly string _firstName = firstName;
+        private readonly string _lastName = lastName;
+
+        public string FirstName => _firstName;
+        public string LastName => _lastName;
+
         public void Deconstruct(out string firstName, out string lastName)
         {
             firstName = FirstName;
